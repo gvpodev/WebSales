@@ -11,6 +11,7 @@
     <Folder Include="Models\Enums\" />
     <Folder Include="Views\Sellers\" />
     <Folder Include="Services\" />
+    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
