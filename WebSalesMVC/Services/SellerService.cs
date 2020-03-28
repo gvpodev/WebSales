@@ -1,10 +1,8 @@
 ﻿using WebSalesMVC.Models;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WebSalesMVC.Services.Exceptions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace WebSalesMVC.Services
 {
@@ -35,9 +33,16 @@ namespace WebSalesMVC.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id);
-            _context.Seller.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id);
+                _context.Seller.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Can not delete this Seller, because he/she has sales");
+            }
         }
 
         public async Task UpdateAsync(Seller seller)
