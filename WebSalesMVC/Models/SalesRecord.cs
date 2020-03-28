@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using WebSalesMVC.Models.Enums;
 namespace WebSalesMVC.Models
 {
     public class SalesRecord
     {
         public int  Id { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public SaleStatus Status { get; set; }
