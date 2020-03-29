@@ -17,6 +17,13 @@ namespace WebSalesMVC.Services
             _context = context;
         }
 
+
+        public async Task InsertAsync(SalesRecord obj)
+        {
+            _context.Add(obj);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
         {
             if (minDate.HasValue && maxDate.HasValue)

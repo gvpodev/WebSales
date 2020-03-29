@@ -15,7 +15,7 @@ namespace WebSalesMVC.Services
             _context = context;
         }
 
-        public async Task<List<Seller>> FindAllAsync()
+        public async Task<IEnumerable<Seller>> FindAllAsync()
         {
             return await _context.Seller.ToListAsync();
         }
@@ -61,18 +61,6 @@ namespace WebSalesMVC.Services
             {
                 throw new DbConcurrencyException(e.Message);
             }
-        }
-
-        public async Task NewSaleAsync(Seller seller, SalesRecord salesRecord)
-        {
-            bool hasAny = await _context.Seller.AnyAsync(x => x.Id == seller.Id);
-            if (!hasAny)
-            {
-                throw new NotFoundException("Id not found");
-            }
-
-            seller.AddSales(salesRecord);
-            await _context.SaveChangesAsync();
         }
     }
 }

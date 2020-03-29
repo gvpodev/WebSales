@@ -6,8 +6,6 @@ namespace WebSalesMVC.Models
     public class SalesRecord
     {
         public int  Id { get; set; }
-
-        [Required(ErrorMessage = "{0} required")]
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public SaleStatus Status { get; set; }
@@ -15,6 +13,14 @@ namespace WebSalesMVC.Models
 
         public SalesRecord()
         {
+        }
+
+        public SalesRecord(DateTime date, double amount, SaleStatus status, Seller seller)
+        {
+            Date = date;
+            Amount = amount;
+            Status = status;
+            Seller = seller;
         }
 
         public SalesRecord(int id, DateTime date, double amount,

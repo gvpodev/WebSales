@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Seller>;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Sale</h4>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Date</label>
+                <input name="Date" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Amount</label>
+                <input name="Amount" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label class="control-label">Status</label>
+                    <select name="Status" asp-items="@(new SelectList
+                        (Enum.GetValues(typeof(WebSalesMVC.Models.Enums.SaleStatus))
+                        .Cast<WebSalesMVC.Models.Enums.SaleStatus>()))"
+                            class="form-control"></select>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label class="control-label">Seller</label>
+                    <select name="SellerId" asp-items="@(new SelectList(Model,
+                                "Id", "Name"))" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
