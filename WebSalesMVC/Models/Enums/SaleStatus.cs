@@ -1,5 +1,4 @@
-﻿using System;
-namespace WebSalesMVC.Models.Enums
+﻿namespace WebSalesMVC.Models.Enums
 {
     public enum SaleStatus : int
     {

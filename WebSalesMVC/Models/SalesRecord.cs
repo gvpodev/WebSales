@@ -7,11 +7,17 @@ namespace WebSalesMVC.Models
     {
         public int  Id { get; set; }
 
-        [Required(ErrorMessage = "{0} required")]
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyy}")]
         public DateTime Date { get; set; }
+
+        [DataType(DataType.Currency)]
         public double Amount { get; set; }
         public SaleStatus Status { get; set; }
         public Seller Seller { get; set; }
+        public Department Department { get; set; }
+
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
 
         public SalesRecord()
         {

@@ -1,0 +1,52 @@
+﻿@model WebSalesMVC.Models.ViewModels.SaleFormViewModel;
+@{
+    ViewData["Title"] = "Create Sale";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Sale</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Sale.Seller" class="control-label"></label>
+                <input asp-for="Sale.Seller" class="form-control" />
+                <span asp-validation-for="Sale.Seller" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sale.Date" class="control-label"></label>
+                <input asp-for="Sale.Date" class="form-control" />
+                <span asp-validation-for="Sale.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sale.Amount" class="control-label"></label>
+                <input asp-for="Sale.Amount" class="form-control" />
+                <span asp-validation-for="Sale.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sale.DepartmentId" class="control-label"></label>
+                <select asp-for="Sale.DepartmentId" asp-items="@(new SelectList(Model.Departments, "Id",
+                 "Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label asp-for="Sale.Status" class="control-label"></label>
+                    <select asp-for="Sale.Status" asp-items="@(new SelectList
+                        (Enum.GetValues(typeof(WebSalesMVC.Models.Enums.SaleStatus))
+                        .Cast<WebSalesMVC.Models.Enums.SaleStatus>()))"
+                            class="form-control"></select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

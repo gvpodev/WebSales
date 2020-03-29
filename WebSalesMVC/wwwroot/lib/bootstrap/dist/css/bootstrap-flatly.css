@@ -2750,6 +2750,10 @@ textarea.form-control {
   }
 }
 
+.btn-padded{
+    padding-top: 10px;
+}
+
 .btn:hover {
   color: coral;
   text-decoration: none;
