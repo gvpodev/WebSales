@@ -100,6 +100,24 @@ namespace WebSalesMVC.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> NewSale(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+
+            var obj = await _sellerService.FindByIdAsync(id.Value);
+
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+
+            SaleFormViewModel viewModel = new SaleFormViewModel { Seller = obj };
+            return View(viewModel);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Seller seller)
@@ -161,6 +179,25 @@ namespace WebSalesMVC.Controllers
             catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NewSale(int id, Seller seller, SalesRecord salesRecord)
+        {
+
+            ViewData["saleDate"] = salesRecord.Date.ToString("yyyy-MM-dd");
+            ViewData["amount"] = salesRecord.Amount.ToString("F2");
+            ViewData["status"] = salesRecord.Status;
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new SaleFormViewModel
+                {
+                    Seller = seller,
+                    SalesRecord = salesRecord
+                };
+                return View(viewModel);
             }
         }
     }

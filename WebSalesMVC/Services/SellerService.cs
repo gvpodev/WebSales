@@ -62,5 +62,17 @@ namespace WebSalesMVC.Services
                 throw new DbConcurrencyException(e.Message);
             }
         }
+
+        public async Task NewSaleAsync(Seller seller, SalesRecord salesRecord)
+        {
+            bool hasAny = await _context.Seller.AnyAsync(x => x.Id == seller.Id);
+            if (!hasAny)
+            {
+                throw new NotFoundException("Id not found");
+            }
+
+            seller.AddSales(salesRecord);
+            await _context.SaveChangesAsync();
+        }
     }
 }
