@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using WebSalesMVC.Models.Enums;
 
 namespace WebSalesMVC.Models
 {
@@ -63,7 +64,7 @@ namespace WebSalesMVC.Models
 
         public double TotalSales(DateTime initial, DateTime final)
         {
-            return Sales.Where(sr => sr.Date >= initial && sr.Date <= final).Sum(sr => sr.Amount);
+            return Sales.Where(sr => sr.Date >= initial && sr.Date <= final && sr.Status == SaleStatus.Billed).Sum(sr => sr.Amount);
         }
     }
 }
