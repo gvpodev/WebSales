@@ -6,6 +6,8 @@ namespace WebSalesMVC.Models
     public class SalesRecord
     {
         public int  Id { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public SaleStatus Status { get; set; }
